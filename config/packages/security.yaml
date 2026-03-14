@@ -23,8 +23,7 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
-
+            #target: form_login
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800
@@ -41,8 +40,8 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/task, roles: ROLE_USER }
 
 when@test:
     security:
