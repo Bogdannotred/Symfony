@@ -20,12 +20,16 @@ class TaskRepository extends ServiceEntityRepository
 
   public function findByTitle(string $term , user $user): array
 {
-return $this ->createQueryBuilder('t')
-        ->setParameter('term', $term)
-        ->andWhere('t.title LIKE :term')
-        ->getQuery()
-        ->getResult()
-        ;
+    return $this ->createQueryBuilder('t')
+            ->setParameter('term', '%' . $term . '%')
+            ->setParameter('user', $user)
+            ->andWhere('t.owner = :user')
+            ->andWhere('t.title LIKE :term')
+            ->getQuery()
+            ->getResult();
+            ;
+
+        
 }
     //    /**
     //     * @return Task[] Returns an array of Task objects

@@ -11,6 +11,15 @@
         <input type="submit" value="submit" />
     </form>
 
+<form method="get" action="{{ path('app_task_index') }}">
+    <select name="status" onchange="this.form.submit()">
+        <option value="">Toate statusurile</option>
+        <option value="todo">De făcut</option>
+        <option value="done">Finalizate</option>
+    </select>
+    <input type="hidden" name="search" value="{{ app.request.query.get('search') }}">
+</form>
+
 
     <table class="table">
         <thead>
