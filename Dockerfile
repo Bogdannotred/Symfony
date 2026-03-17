@@ -45,5 +45,8 @@ RUN composer dump-autoload --optimize --classmap-authoritative --no-dev \
     && DATABASE_URL="sqlite:///:memory:" php bin/console asset-map:compile \
     && chmod -R 777 var/
 
-# Use the default FrankenPHP entrypoint
-CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"]
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
+
+ENTRYPOINT ["docker-entrypoint"]
