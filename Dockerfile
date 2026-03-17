@@ -42,7 +42,7 @@ ENV FRANKENPHP_CONFIG="worker ./public/index.php"
 
 # Build assets and finalize setup
 RUN composer dump-autoload --optimize --classmap-authoritative --no-dev \
-    && php bin/console asset-map:compile \
+    && DATABASE_URL="sqlite:///:memory:" php bin/console asset-map:compile \
     && chmod -R 777 var/
 
 # Use the default FrankenPHP entrypoint
