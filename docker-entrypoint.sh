@@ -17,6 +17,10 @@ php bin/console cache:clear --no-interaction
 echo "Running database migrations..."
 php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration || echo "Migration failed, but continuing..."
 
-# Start FrankenPHP using the simplified PHP server mode
-echo "Starting FrankenPHP on port ${PORT:-8080}..."
-exec frankenphp php-server -vv -l 0.0.0.0:${PORT:-8080} -r public/index.php
+# Set SERVER_NAME if PORT is provided by Railway
+if [ ! -z "$PORT" ]; then
+    export SERVER_NAME=":$PORT"
+fi
+
+echo "Starting FrankenPHP on $SERVER_NAME..."
+exec frankenphp run --config /etc/caddy/Caddyfile

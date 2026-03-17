@@ -39,6 +39,7 @@ COPY . .
 ENV APP_ENV=prod
 ENV APP_RUNTIME=Symfony\\Component\\Runtime\\GenericRuntime
 ENV FRANKENPHP_CONFIG="worker ./public/index.php"
+ENV SERVER_NAME=:8080
 
 # Build assets and finalize setup
 RUN composer dump-autoload --optimize --classmap-authoritative --no-dev \
