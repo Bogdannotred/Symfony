@@ -2,54 +2,16 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Task;
-use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
-    private UserPasswordHasherInterface $hasher;
-
-    public function __construct(UserPasswordHasherInterface $hasher)
-    {
-        $this->hasher = $hasher;
-    }
-
     public function load(ObjectManager $manager): void
     {
-        $userData = [
-            ['email' => 'junior@test.com', 'password' => 'password'],
-            ['email' => 'senior@test.com', 'password' => 'password123'],
-        ];
+        // $product = new Product();
+        // $manager->persist($product);
 
-        foreach ($userData as $data) {
-            $user = new User();
-            $user->setEmail($data['email']);
-            $user->setRoles(['ROLE_USER']);
-
-            $hashedPassword = $this->hasher->hashPassword($user, $data['password']);
-            $user->setPassword($hashedPassword);
-
-            $manager->persist($user);
-
-
-            for ($i = 1; $i <= 10; $i++) {
-                $task = new Task();
-                $task->setTitle("Task Objective #$i for " . explode('@', $user->getEmail())[0]);
-                $task->setDescription("This represents a critical milestone in our workflow, specifically task number $i.");
-                $task->setIsDone((bool)rand(0, 1));
-                $task->setOwner($user);
-                
-                // Spread dates over the last 30 days
-                $daysOffset = rand(0, 30);
-                $date = new \DateTimeImmutable("-$daysOffset days");
-                $task->setCreatedAt($date);
-
-                $manager->persist($task);
-            }
-        }
         $manager->flush();
     }
 }
