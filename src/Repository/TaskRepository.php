@@ -18,18 +18,23 @@ class TaskRepository extends ServiceEntityRepository
     }
 
 
-  public function findByTitle(string $term , user $user): array
+public function findByTitle(string $term, User $user, string $direction, string $status): array
 {
-    return $this ->createQueryBuilder('t')
-            ->setParameter('term', '%' . $term . '%')
-            ->setParameter('user', $user)
-            ->andWhere('t.owner = :user')
-            ->andWhere('t.title LIKE :term')
-            ->getQuery()
-            ->getResult();
-            ;
+    $qb = $this->createQueryBuilder('t')
+        ->andWhere('t.owner = :user')
+        ->setParameter('user', $user)
+        ->orderBy('t.createdAt', $direction);
+    if (!empty($term)) {
+        $qb->andWhere('t.title LIKE :term')
+           ->setParameter('term', '%' . $term . '%');
+    }
+    if ($status === 'Done') {
+        $qb->andWhere('t.isDone = :done')->setParameter('done', true);
+    } elseif ($status === 'Open') {
+        $qb->andWhere('t.isDone = :open')->setParameter('open', false);
+    }
 
-        
+    return $qb->getQuery()->getResult();
 }
     //    /**
     //     * @return Task[] Returns an array of Task objects

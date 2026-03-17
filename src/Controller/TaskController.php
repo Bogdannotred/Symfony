@@ -15,20 +15,20 @@ use Symfony\Component\Routing\Attribute\Route;
 final class TaskController extends AbstractController
 {
     #[Route(name: 'app_task_index', methods: ['GET'])]
-    public function index(TaskRepository $taskRepository , Request $request): Response
-    {
-        $user = $this -> getUser();
-        $search = $request->query->get('search');
-        if($search)
-        {
-            $tasks = $taskRepository->findByTitle($search , $user);
-        } else {
-            $tasks = $taskRepository->findBy(['owner' => $user]);
-        }
-        return $this->render('task/index.html.twig', [
-            'tasks' => $tasks,
-        ]);
-    }
+    public function index(TaskRepository $taskRepository, Request $request): Response
+{
+    $user = $this->getUser();
+    $search = $request->query->get('search', ''); 
+    $direction = $request->query->get("direction", 'DESC');
+    $status = $request->query->get("status", 'All');
+
+
+    $tasks = $taskRepository->findByTitle($search, $user, $direction, $status);
+
+    return $this->render('task/index.html.twig', [
+        'tasks' => $tasks,
+    ]);
+}
 
     #[Route('/new', name: 'app_task_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -64,6 +64,11 @@ final class TaskController extends AbstractController
     #[Route('/{id}/edit', name: 'app_task_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Task $task, EntityManagerInterface $entityManager): Response
     {
+
+        if ($task->getOwner() !== $this->getUser()) {
+        throw $this->createAccessDeniedException('Nu ai voie să editezi acest task!');
+        }
+
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 

@@ -11,14 +11,33 @@
         <input type="submit" value="submit" />
     </form>
 
-<form method="get" action="{{ path('app_task_index') }}">
-    <select name="status" onchange="this.form.submit()">
-        <option value="">Toate statusurile</option>
-        <option value="todo">De făcut</option>
-        <option value="done">Finalizate</option>
-    </select>
-    <input type="hidden" name="search" value="{{ app.request.query.get('search') }}">
-</form>
+    <form method="get" action="{{ path('app_task_index') }}">
+        <select name="direction" onchange="this.form.submit()">
+            <option value="ASC" {{ app.request.query.get('direction') == 'ASC' ? 'selected' : '' }}>
+                Ascendent
+            </option>
+            <option value="DESC" {{ app.request.query.get('direction') == 'DESC' ? 'selected' : '' }}>
+                Descendent
+            </option>
+        </select>
+        
+        <input type="hidden" name="search" value="{{ app.request.query.get('search') }}">
+    </form>
+
+        <form method="get" action="{{ path('app_task_index') }}">
+        <select name="status" onchange="this.form.submit()">
+            <option value="All" {{ app.request.query.get('status') == 'All' ? 'selected' : '' }}>
+                All
+            </option>
+            <option value="Open" {{ app.request.query.get('status') == 'Open' ? 'selected' : '' }}>
+                Open
+            </option>
+            <option value="Done" {{ app.request.query.get('status') == 'Done' ? 'selected' : '' }}>
+                Done
+            </option>
+        </select>
+        
+    </form>
 
 
     <table class="table">
@@ -28,6 +47,8 @@
                 <th>Title</th>
                 <th>Description</th>
                 <th>IsDone</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -38,6 +59,8 @@
                 <td>{{ task.title }}</td>
                 <td>{{ task.description }}</td>
                 <td>{{ task.isDone ? 'Yes' : 'No' }}</td>
+                <td>{{ task.createdAt ? task.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ task.updatedAt ? task.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_task_show', {'id': task.id}) }}">show</a>
                     <a href="{{ path('app_task_edit', {'id': task.id}) }}">edit</a>
