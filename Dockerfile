@@ -37,7 +37,7 @@ COPY . .
 
 # Set environment variables for production
 ENV APP_ENV=prod
-ENV APP_RUNTIME=Symfony\Component\Runtime\GenericRuntime
+ENV APP_RUNTIME=Symfony\\Component\\Runtime\\GenericRuntime
 ENV FRANKENPHP_CONFIG="worker ./public/index.php"
 
 # Build assets and finalize setup
