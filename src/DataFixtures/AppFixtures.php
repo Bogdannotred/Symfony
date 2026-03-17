@@ -35,12 +35,18 @@ class AppFixtures extends Fixture
             $manager->persist($user);
 
 
-            for ($i = 1; $i <= 5; $i++) {
+            for ($i = 1; $i <= 10; $i++) {
                 $task = new Task();
-                $task->setTitle("Task demo $i pentru " . $user->getEmail());
-                $task->setDescription("Aceasta este descrierea pentru task-ul numărul $i.");
+                $task->setTitle("Task Objective #$i for " . explode('@', $user->getEmail())[0]);
+                $task->setDescription("This represents a critical milestone in our workflow, specifically task number $i.");
                 $task->setIsDone((bool)rand(0, 1));
                 $task->setOwner($user);
+                
+                // Spread dates over the last 30 days
+                $daysOffset = rand(0, 30);
+                $date = new \DateTimeImmutable("-$daysOffset days");
+                $task->setCreatedAt($date);
+
                 $manager->persist($task);
             }
         }
