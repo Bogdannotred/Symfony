@@ -1,12 +1,16 @@
 # Production Dockerfile for Symfony (FrankenPHP)
 FROM dunglas/frankenphp:1-php8.3
 
+# Install Composer from official image
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     acl \
     file \
     gettext \
     git \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
