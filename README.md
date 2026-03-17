@@ -16,10 +16,12 @@ Welcome to **Superior Tasks**, a high-end, premium task management application b
 
 ## 📸 Screenshots
 
-*(User: Inserați capturile de ecran aici pentru un impact maxim la interview!)*
+![Dashboard](images/Screenshot%202026-03-17%20at%205.30.33%20PM.png)
+![Login](images/Screenshot%202026-03-17%20at%205.30.38%20PM.png)
+![Task Details](images/Screenshot%202026-03-17%20at%205.30.44%20PM.png)
 
 > [!TIP]
-> Recomandăm capturi de ecran pentru: Dashboard-ul principal, Pagina de Login și Vizualizarea detaliată a obiectivelor.
+> Aceste imagini reflectă designul final cu Glassmorphism și tipografia Outfit.
 
 ---
 
