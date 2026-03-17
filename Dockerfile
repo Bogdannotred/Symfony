@@ -1,0 +1,42 @@
+# Production Dockerfile for Symfony (FrankenPHP)
+FROM dunglas/frankenphp:1-php8.3
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    acl \
+    file \
+    gettext \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions
+RUN install-php-extensions \
+    intl \
+    zip \
+    opcache \
+    pdo_mysql
+
+# Set working directory
+WORKDIR /app
+
+# Copy composer files
+COPY composer.json composer.lock ./
+
+# Install dependencies
+RUN composer install --no-dev --optimize-autoloader --no-scripts --no-progress
+
+# Copy application files
+COPY . .
+
+# Set environment variables for production
+ENV APP_ENV=prod
+ENV APP_RUNTIME=Symfony\Component\Runtime\GenericRuntime
+ENV FRANKENPHP_CONFIG="worker ./public/index.php"
+
+# Build assets and finalize setup
+RUN composer dump-autoload --optimize --classmap-authoritative --no-dev \
+    && php bin/console asset-map:compile \
+    && chmod -R 777 var/
+
+# Use the default FrankenPHP entrypoint
+CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"]
