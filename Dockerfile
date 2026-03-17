@@ -1,5 +1,5 @@
 # Production Dockerfile for Symfony (FrankenPHP)
-FROM dunglas/frankenphp:1-php8.3
+FROM dunglas/frankenphp:1-php8.4
 
 # Set non-interactive mode for apt
 ENV DEBIAN_FRONTEND=noninteractive
