@@ -50,4 +50,7 @@ RUN composer dump-autoload --optimize --classmap-authoritative --no-dev \
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
+# Expose the port (Railway uses $PORT, but we'll default to 8080)
+EXPOSE 8080
+
 ENTRYPOINT ["docker-entrypoint"]
