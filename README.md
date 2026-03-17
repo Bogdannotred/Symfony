@@ -16,9 +16,9 @@ Welcome to **Superior Tasks**, a high-end, premium task management application b
 
 ## 📸 Screenshots
 
-![Dashboard](images/Screenshot%202026-03-17%20at%205.30.33%20PM.png)
-![Login](images/Screenshot%202026-03-17%20at%205.30.38%20PM.png)
-![Task Details](images/Screenshot%202026-03-17%20at%205.30.44%20PM.png)
+![Dashboard](images/dashboard.png)
+![Login](images/login.png)
+![Task Details](images/details.png)
 
 > [!TIP]
 > Aceste imagini reflectă designul final cu Glassmorphism și tipografia Outfit.
