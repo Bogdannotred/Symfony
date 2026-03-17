@@ -1,13 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Task{% endblock %}
+{% block title %}Edit Task: {{ task.title }}{% endblock %}
 
 {% block body %}
-    <h1>Edit Task</h1>
+<div class="max-w-4xl mx-auto px-6 py-16">
+    <!-- Back Navigation -->
+    <div class="mb-10">
+        <a href="{{ path('app_task_index') }}" class="group inline-flex items-center gap-3 text-sm font-bold text-slate-400 hover:text-indigo-600 transition-colors">
+            <div class="p-2 bg-white rounded-xl shadow-sm group-hover:bg-indigo-50 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </div>
+            Back to Dashboard
+        </a>
+    </div>
 
-    {{ include('task/_form.html.twig', {'button_label': 'Update'}) }}
+    <!-- Page Header -->
+    <div class="mb-12 text-center">
+        <h1 class="text-4xl font-black text-slate-800 tracking-tight mb-3">Refine Objective</h1>
+        <p class="text-slate-500 font-medium">Update the details of "{{ task.title }}".</p>
+    </div>
 
-    <a href="{{ path('app_task_index') }}">back to list</a>
+    <!-- Form Container -->
+    <div class="relative space-y-12">
+        <!-- Decorative bloom -->
+        <div class="absolute -top-12 -left-12 w-32 h-32 bg-amber-100/30 blur-3xl rounded-full"></div>
+        
+        {{ include('task/_form.html.twig', {'button_label': 'Update Objective'}) }}
 
-    {{ include('task/_delete_form.html.twig') }}
+        <!-- Danger Zone -->
+        <div class="glass-card p-10 border-rose-100 bg-rose-50/30">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+                <div>
+                    <h3 class="text-lg font-black text-rose-800 uppercase tracking-wider mb-2">Final Termination</h3>
+                    <p class="text-rose-600/70 font-medium text-sm">Deleting this objective is permanent and cannot be undone.</p>
+                </div>
+                
+                <div class="delete-form-wrapper">
+                    {{ include('task/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .delete-form-wrapper button {
+        background: white;
+        color: #e11d48;
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 800;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border: 2px solid #fecdd3;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .delete-form-wrapper button:hover {
+        background: #fff1f2;
+        border-color: #e11d48;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(225, 29, 72, 0.1);
+    }
+</style>
 {% endblock %}

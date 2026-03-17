@@ -66,7 +66,7 @@ final class TaskController extends AbstractController
     {
 
         if ($task->getOwner() !== $this->getUser()) {
-        throw $this->createAccessDeniedException('Nu ai voie să editezi acest task!');
+        throw $this->createAccessDeniedException('You do not have permission to edit this task.');
         }
 
         $form = $this->createForm(TaskType::class, $task);
