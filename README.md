@@ -21,13 +21,13 @@ Welcome to **Superior Tasks**, a high-end, premium task management application b
 ![Task Details](images/details.png)
 
 > [!TIP]
-> Aceste imagini reflectă designul final cu Glassmorphism și tipografia Outfit.
+> These images reflect the final design featuring Glassmorphism and Outfit typography.
 
 ---
 
 ## 🔑 Mock Credentials (Demo)
 
-Pentru prezentarea la interview, am pregătit următoarele conturi în baza de date:
+For the interview presentation, the following accounts have been pre-configured in the database:
 
 | Role | Email | Password |
 | :--- | :--- | :--- |
@@ -65,8 +65,8 @@ Pentru prezentarea la interview, am pregătit următoarele conturi în baza de d
 
 ## ☁️ Deployment
 
-Proiectul este pre-configurat pentru **Railway** și **Render.com**.
-Toate detaliile tehnice despre cum să pui aplicația live sunt disponibile în [Ghidul de Deployment](file:///Users/bogdy2k/.gemini/antigravity/brain/bb9c07cf-5f90-4333-93d1-8b1106920398/deployment_guide.md).
+The project is pre-configured for Railway and Render.com.
+Detailed technical instructions on how to go live are available in the Deployment Guide..
 
 ---
 
